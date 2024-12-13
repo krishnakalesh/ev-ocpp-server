@@ -1,24 +1,92 @@
-# Compiled class file
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
+logs/
 *.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+*.jar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# IDE-specific files
+.classpath
+.idea/
+.settings/
+.project
+
+# Build system
+*.iml
+target/
+build/
+.gradle/
+gradle/gradle.lockfile
+gradle/wrapper/gradle-wrapper.jar
+
+# Dependency management
+.mvn/
+mvnw
+mvnw.cmd
+
+# Testing
+**/target/
+**/build/
+
+# IDE-specific files
+.vscode/
+
+# Docker
+Dockerfile*
+docker-compose.yml
+docker-compose.override.yml
+.dockerignore
+
+# IntelliJ IDEA
+*.iml
+.idea/
+.idea/workspace.xml
+.idea/libraries/
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/
+build.xml
+
+# Maven
+pom.xml.next
+target/
+
+# Gradle
+build/
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Spring Boot DevTools
+!**/*.jar
+
+# SonarQube
+sonar-project.properties
+
+# Checkstyle
+checkstyle.xml
+checkstyle-result.xml
+
+# Findbugs
+findbugsXml.xml
+
+# PMD
+pmd.xml
+pmd.properties
+
+# Code coverage reports
+coverage/
+jacoco.exec
+
+# Git
+.git/
+.gitignore

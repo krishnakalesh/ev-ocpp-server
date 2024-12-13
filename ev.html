@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCPP WebSocket Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #logs {
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            border-radius: 4px;
+        }
+        .log-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .sent {
+            background-color: #e6f7ff;
+            color: #0056b3;
+        }
+        .received {
+            background-color: #f2ffe6;
+            color: #2b7a0b;
+        }
+        .info {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OCPP WebSocket Client</h1>
+        <div class="form-group">
+            <label for="url">WebSocket URL:</label>
+            <input type="text" id="url" value="ws://localhost:8080/ocpp" />
+            <button onclick="connect()">Connect</button>
+            <button onclick="disconnect()">Disconnect</button>
+        </div>
+        <div class="form-group">
+            <textarea id="message" rows="5" placeholder="Enter OCPP message here..."></textarea><br>
+            <button onclick="sendMessage()">Send Message</button>
+        </div>
+        <div class="form-group">
+            <h3>Logs:</h3>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        let socket;
+
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const logEntry = document.createElement('div');
+            logEntry.classList.add('log-message', type);
+            logEntry.textContent = message;
+            logs.appendChild(logEntry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function connect() {
+            const url = document.getElementById('url').value;
+            socket = new WebSocket(url);
+
+            socket.onopen = () => log(`Connected to ${url}`, 'info');
+            socket.onmessage = (event) => log(`Received: ${event.data}`, 'received');
+            socket.onerror = (error) => log(`Error: ${error.message}`, 'info');
+            socket.onclose = () => log('Disconnected', 'info');
+        }
+
+        function disconnect() {
+            if (socket) {
+                socket.close();
+                log('Disconnected manually', 'info');
+            }
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(message);
+                log(`Sent: ${message}`, 'sent');
+            } else {
+                log('Socket is not connected', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
