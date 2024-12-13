@@ -5,7 +5,7 @@ Just run the SpringBoot aaplication and try connecting to application using an E
 
 Simulator available at https://github.com/krishnakalesh/ev-ocpp-server/blob/main/ev.html 
 
-Once you connect via web socket messages will flow to and fro following OCOO 2.0.1 protocol
+Once you connect via web socket messages will flow to and fro following OCPP 2.0.1 protocol
 
 ![alt text](https://github.com/krishnakalesh/ev-ocpp-server/blob/main/simulator_screenshot2.png)
 
